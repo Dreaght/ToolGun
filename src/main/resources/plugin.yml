@@ -1,0 +1,4 @@
+name: ToolGun
+version: '${version}'
+main: com.megadev.toolgun.ToolGun
+api-version: '1.20'
