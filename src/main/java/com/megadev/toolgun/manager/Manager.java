@@ -1,2 +1,9 @@
-package com.megadev.toolgun.manager;public interface Manager {
+package com.megadev.toolgun.manager;
+
+public interface Manager {
+    void load();
+
+    void update();
+
+    void stop();
 }

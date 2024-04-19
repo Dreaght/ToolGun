@@ -1,7 +1,7 @@
-item: stick # tool gun item
-CustomModelData: 10000
+item: STICK # tool gun item
+custom-model-data: 10000
 name: "&dTool Gun"
 lore:
-  - "&7(Left Click) - Сломать блок"
-  - "&7(Right Click) - Поставить блок"
+  - "&7(Left Click) - Break the block"
+  - "&7(Right Click) - Place the block"
 

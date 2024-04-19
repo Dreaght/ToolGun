@@ -1,15 +1,16 @@
-package com.megadev.toolgun.manager;
+package com.megadev.toolgun.storage;
 
-import com.megadev.toolgun.object.toolgun.block.ToolGunBlock;
-
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
 public interface Data<T> {
     Map<UUID, T> getData();
 
-    void addValue(UUID key, T value);
+    T getValue(UUID key);
+
+    boolean contains(UUID key);
+
+    boolean addValue(UUID key, T value);
 
     void remove(UUID key);
 

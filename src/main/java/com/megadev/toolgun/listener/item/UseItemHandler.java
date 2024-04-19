@@ -1,10 +1,23 @@
-package com.megadev.toolgun.listener.useitem;
+package com.megadev.toolgun.listener.item;
 
+import com.megadev.toolgun.config.ConfigManager;
+import com.megadev.toolgun.config.manager.UserConfig;
+import com.megadev.toolgun.config.manager.UserManager;
+import com.megadev.toolgun.limits.LimitHandler;
 import com.megadev.toolgun.manager.BlocksManager;
 import com.megadev.toolgun.manager.MenuManager;
 import com.megadev.toolgun.manager.ToolGunManager;
+import com.megadev.toolgun.object.toolgun.block.BukkitBlock;
+import com.megadev.toolgun.object.toolgun.block.IBlock;
+import com.megadev.toolgun.object.toolgun.block.ItemsAdderBlock;
 import com.megadev.toolgun.object.toolgun.item.ToolGunItem;
 import com.megadev.toolgun.object.transfer.ToolGunBlockTransfer;
+import com.megadev.toolgun.util.ActionBar;
+import com.megadev.toolgun.util.Color;
+import com.megadev.toolgun.util.ParsePlaceholder;
+import dev.lone.itemsadder.api.CustomBlock;
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
@@ -13,6 +26,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.Objects;
 import java.util.UUID;
 
 public class UseItemHandler {
@@ -20,25 +34,14 @@ public class UseItemHandler {
     private final PlayerInteractEvent event;
     private final BlocksManager blocksManager = BlocksManager.getInstance();
     private final MenuManager menuManager = MenuManager.getInstance();
+    private final UserManager userManager = ConfigManager.getInstance().getUserManager();
 
     public UseItemHandler(PlayerInteractEvent event) {
         this.event = event;
     }
 
     public boolean handleEvent() {
-        ItemStack item = event.getItem();
-
-        ToolGunManager toolGunManager = ToolGunManager.getInstance();
         uuid = event.getPlayer().getUniqueId();
-
-        ToolGunItem toolGunItem = toolGunManager.getBasicToolGun();
-        if (toolGunItem == null) {
-            return false;
-        }
-
-        if (item == null || !item.equals(toolGunItem.getItemStack())) {
-            return false;
-        }
 
         if (!handleClick()) {
             event.setCancelled(true);
@@ -68,12 +71,37 @@ public class UseItemHandler {
     }
 
     private boolean leftClickHandle(Block block) {
-        return blocksManager.onRemove(new ToolGunBlockTransfer(uuid, block));
+        return blocksManager.onRemove(new ToolGunBlockTransfer(uuid, getIBlock(block, true)));
     }
 
     private boolean rightClickHandle(Block block) {
         BlockFace blockFace = event.getBlockFace();
-        return blocksManager.onAdd(new ToolGunBlockTransfer(uuid, block.getRelative(blockFace)));
+
+        if (block.getRelative(blockFace).getType() != Material.AIR) {
+            return false;
+        }
+        return blocksManager.onAdd(new ToolGunBlockTransfer(uuid, getIBlock(block.getRelative(blockFace), false)));
+    }
+
+    private IBlock getIBlock(Block block, boolean byPlaced) {
+        CustomBlock customBlock;
+
+        if (byPlaced) {
+            customBlock = CustomBlock.byAlreadyPlaced(block);
+        } else {
+            customBlock = CustomBlock.getInstance(getChosenMaterial());
+        }
+
+        if (customBlock != null) {
+            return new ItemsAdderBlock(uuid, customBlock, block.getLocation());
+        } else {
+            return new BukkitBlock(uuid, block);
+        }
+    }
+
+    private String getChosenMaterial() {
+        UserConfig userConfig = userManager.getUserConfig(uuid.toString());
+        return userConfig.getIStack().getName();
     }
 
     private boolean rightClickAirHandle() {

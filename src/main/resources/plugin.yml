@@ -1,4 +1,8 @@
 name: ToolGun
 version: '${version}'
 main: com.megadev.toolgun.ToolGun
-api-version: '1.20'
+api-version: '1.17'
+depend: ["LuckPerms"]
+softdepend: ["ItemsAdder"]
+commands:
+  toolgun: {}

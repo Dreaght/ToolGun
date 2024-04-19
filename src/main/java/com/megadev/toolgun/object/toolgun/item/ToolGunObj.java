@@ -1,4 +1,4 @@
-package com.megadev.toolgun.object.toolgun;
+package com.megadev.toolgun.object.toolgun.item;
 
 import lombok.Getter;
 import org.bukkit.Material;

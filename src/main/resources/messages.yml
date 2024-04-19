@@ -1,0 +1,3 @@
+limit-actionbar: "&eYou have %LIMIT% blocks remained!"
+invalid-player-arg: "&cPlease, input a valid player!"
+chosen-block: "&aYou've chosen %MATERIAL% &aas material for your &dToolGun&a!"

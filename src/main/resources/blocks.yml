@@ -1,0 +1,9 @@
+blocks:
+  STONE:
+    title: "&6Stone"
+  OBSIDIAN:
+    title: "&6Obsidian"
+  COBBLESTONE:
+    title: "&6Cobblestone"
+  itemsadder:blockus:acacia_barrel:
+    title: "&6Acacia barrel"

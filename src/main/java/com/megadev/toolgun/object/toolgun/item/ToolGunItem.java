@@ -1,28 +1,32 @@
 package com.megadev.toolgun.object.toolgun.item;
 
 import com.megadev.toolgun.object.toolgun.Spawnable;
+import com.megadev.toolgun.object.toolgun.ToolGunStuff;
 import lombok.Getter;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-public class ItemToolGun implements Spawnable {
-    @Getter private Player holder;
+import java.util.UUID;
+
+public class ToolGunItem implements ToolGunStuff, Spawnable {
+    @Getter private UUID uuid;
     @Getter private ToolGunObj toolGunObj;
     
-    public ItemToolGun(Player holder, ToolGunObj toolGunObj) {
-        this.holder = holder;
+    public ToolGunItem(UUID uuid, ToolGunObj toolGunObj) {
+        this.uuid = uuid;
         this.toolGunObj = toolGunObj;
     }
 
     @Override
     public void spawn() {
-        holder.getInventory().addItem(getItemStack());
+        getPlayer().getInventory().addItem(getItemStack());
     }
 
     @Override
     public void remove() {
-        holder.getInventory().remove(getItemStack());
+        getPlayer().getInventory().remove(getItemStack());
     }
 
     public ItemStack getItemStack() {
@@ -36,5 +40,9 @@ public class ItemToolGun implements Spawnable {
         itemStack.setItemMeta(itemMeta);
 
         return itemStack;
+    }
+
+    public Player getPlayer() {
+        return Bukkit.getPlayer(uuid);
     }
 }

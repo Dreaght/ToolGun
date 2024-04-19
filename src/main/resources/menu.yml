@@ -1,0 +1,9 @@
+title: "&8Available blocks"
+size: 6 # menu rows
+
+empty-slot-item: GRAY_STAINED_GLASS_PANE
+empty-slot-name: "&0"
+
+block-name: "&a%BLOCK_NAME%"
+block-lore:
+  - "&7This block is available to be used for your ToolGun"

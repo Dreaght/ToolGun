@@ -1,0 +1,4 @@
+breakable-blocks-permission: "toolgun.ob"
+limits:
+  default: 15
+  vip: 25

@@ -3,7 +3,7 @@ plugins {
 }
 
 group = 'com.megadev'
-version = '1.0-SNAPSHOT'
+version = '1.1'
 
 repositories {
     mavenCentral()
@@ -15,10 +15,25 @@ repositories {
         name = "sonatype"
         url = "https://oss.sonatype.org/content/groups/public/"
     }
+    maven {
+        url 'https://jitpack.io'
+    }
 }
 
 dependencies {
-    compileOnly "org.spigotmc:spigot-api:1.20.4-R0.1-SNAPSHOT"
+    compileOnly "org.spigotmc:spigot-api:1.17-R0.1-SNAPSHOT"
+
+    compileOnly 'org.projectlombok:lombok:1.18.32'
+    annotationProcessor 'org.projectlombok:lombok:1.18.32'
+
+    testCompileOnly 'org.projectlombok:lombok:1.18.32'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.32'
+
+    compileOnly 'org.jetbrains:annotations:24.1.0'
+
+    compileOnly 'net.luckperms:api:5.4'
+
+    compileOnly 'com.github.LoneDev6:API-ItemsAdder:3.6.1'
 }
 
 def targetJavaVersion = 17
@@ -47,3 +62,11 @@ processResources {
         expand props
     }
 }
+
+tasks.jar {
+    enabled = true
+    destinationDirectory.set(new File("C:\\Users\\nikit\\Desktop\\MegaDevTests\\plugins"))
+    archiveFileName = "ToolGun-${version}.jar"
+}
+
+build.dependsOn jar
