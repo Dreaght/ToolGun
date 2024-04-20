@@ -4,5 +4,6 @@ main: com.megadev.toolgun.ToolGun
 api-version: '1.17'
 depend: ["LuckPerms"]
 softdepend: ["ItemsAdder"]
+load: POSTWORLD
 commands:
   toolgun: {}

@@ -5,7 +5,6 @@ import com.megadev.toolgun.object.transfer.ToolGunTransfer;
 import com.megadev.toolgun.object.transfer.Transfer;
 import com.megadev.toolgun.storage.ToolGunItemData;
 import lombok.Getter;
-import org.bukkit.plugin.Plugin;
 
 import java.util.UUID;
 
@@ -13,14 +12,10 @@ public class ToolGunManager implements Manager, Addable {
     @Getter private static ToolGunManager instance;
     @Getter private ToolGunItemData toolGunItemData;
     @Getter private ToolGunItem basicToolGun;
-    private Plugin plugin;
 
-    private ToolGunManager(Plugin plugin) {
-        this.plugin = plugin;
-    }
-
-    public static void init(Plugin plugin) {
-        instance = new ToolGunManager(plugin);
+    public static Manager init() {
+        instance = new ToolGunManager();
+        return instance;
     }
 
     @Override

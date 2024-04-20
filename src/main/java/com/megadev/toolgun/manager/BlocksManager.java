@@ -11,7 +11,6 @@ import com.megadev.toolgun.util.Color;
 import com.megadev.toolgun.util.ParsePlaceholder;
 import lombok.Getter;
 import org.bukkit.Bukkit;
-import org.bukkit.plugin.Plugin;
 
 import java.util.List;
 import java.util.Objects;
@@ -21,15 +20,14 @@ public class BlocksManager implements Manager, Addable {
     @Getter private static BlocksManager instance;
     @Getter private BlocksData blocksData;
     @Getter private LimitsData limitsData;
-    private Plugin plugin;
 
-    private BlocksManager(Plugin plugin) {
-        this.plugin = plugin;
+    private BlocksManager() {
         this.blocksData = new BlocksData();
     }
 
-    public static void init(Plugin plugin) {
-        instance = new BlocksManager(plugin);
+    public static Manager init() {
+        instance = new BlocksManager();
+        return instance;
     }
 
     @Override

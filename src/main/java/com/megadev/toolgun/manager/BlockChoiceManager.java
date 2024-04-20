@@ -11,14 +11,10 @@ import java.util.UUID;
 public class BlockChoiceManager implements Manager, Addable {
     @Getter private static BlockChoiceManager instance;
     @Getter private ChosenBlockData chosenBlockData;
-    private Plugin plugin;
 
-    public BlockChoiceManager(Plugin plugin) {
-        this.plugin = plugin;
-    }
-
-    public static void init(Plugin plugin) {
-        instance = new BlockChoiceManager(plugin);
+    public static Manager init() {
+        instance = new BlockChoiceManager();
+        return instance;
     }
 
     @Override
