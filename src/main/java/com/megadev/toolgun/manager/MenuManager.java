@@ -38,6 +38,10 @@ public class MenuManager implements Manager {
         toolGunMenu = new ToolGunMenu(menuData, menuContent);
     }
 
+    public boolean isLoaded() {
+        return toolGunMenu != null;
+    }
+
     @Override
     public void update() {
     }

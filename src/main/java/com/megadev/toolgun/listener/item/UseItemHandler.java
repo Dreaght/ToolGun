@@ -3,20 +3,13 @@ package com.megadev.toolgun.listener.item;
 import com.megadev.toolgun.config.ConfigManager;
 import com.megadev.toolgun.config.manager.UserConfig;
 import com.megadev.toolgun.config.manager.UserManager;
-import com.megadev.toolgun.limits.LimitHandler;
 import com.megadev.toolgun.manager.BlocksManager;
 import com.megadev.toolgun.manager.MenuManager;
-import com.megadev.toolgun.manager.ToolGunManager;
 import com.megadev.toolgun.object.toolgun.block.BukkitBlock;
 import com.megadev.toolgun.object.toolgun.block.IBlock;
 import com.megadev.toolgun.object.toolgun.block.ItemsAdderBlock;
-import com.megadev.toolgun.object.toolgun.item.ToolGunItem;
 import com.megadev.toolgun.object.transfer.ToolGunBlockTransfer;
-import com.megadev.toolgun.util.ActionBar;
-import com.megadev.toolgun.util.Color;
-import com.megadev.toolgun.util.ParsePlaceholder;
 import dev.lone.itemsadder.api.CustomBlock;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
@@ -24,9 +17,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
 
-import java.util.Objects;
 import java.util.UUID;
 
 public class UseItemHandler {

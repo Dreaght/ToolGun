@@ -41,8 +41,19 @@ public final class ToolGun extends JavaPlugin {
         pluginManager.registerEvents(new BreakBlockListener(), this);
     }
 
+    private int taskID;
+
     private void loadMenuDelayed() {
-        Bukkit.getScheduler().runTaskLater(this, () -> MenuManager.getInstance().load(), 50);
+        taskID = Bukkit.getScheduler().runTaskTimer(this, () -> {
+            MenuManager menuManager = MenuManager.getInstance();
+
+            menuManager.load();
+
+            if (menuManager.isLoaded()) {
+                Bukkit.getScheduler().cancelTask(taskID);
+            }
+
+        }, 5, 5).getTaskId();
     }
 
     @Override
