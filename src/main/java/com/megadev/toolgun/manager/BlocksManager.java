@@ -74,17 +74,17 @@ public class BlocksManager implements Manager, Addable {
     public boolean onAdd(Transfer transfer) {
         UUID uuid = transfer.getUUID();
         ToolGunBlock toolGunBlock = (ToolGunBlock) transfer.getStuff();
-
         toolGunBlock.spawn();
+
         if (blocksData.addToolGunBlock(uuid, toolGunBlock)) {
             if (limitsData.decrease(uuid, getLimits(uuid).getLimit())) {
-
                 sendLimitInfo(uuid);
+                return true;
             }
-            return true;
-        } else {
-            toolGunBlock.remove();
         }
+
+        toolGunBlock.remove();
+        blocksData.removeBlock(toolGunBlock);
         return false;
     }
 
